@@ -35,7 +35,7 @@ For 3 truck in the fleet, the following data will be collected in near real-time
 <b>[All data used here are random and simulated using the Python file click_producer.py]</b><br><br>
 
 <strong>Workflow : </strong><br><br>
->> The Clickstream data is collected in realtime using AWS Kinesis and sent to a Lambda function to process and store the data in DynamoDB
+>> The Clickstream data is collected in realtime using AWS Kinesis and sent to a Lambda function to process and store the data in DynamoDB<br>
 >> The Truck IOT data is collected once every 1 minute, posted to an API which triggers a Lambda function and stores the data in DynamoDB<br><br>
 
 > [!CAUTION]
