@@ -49,7 +49,3 @@ while True:
         )
         
         print(f'Sent data to Kinesis: {payload}')
-        time.sleep(1)
-        
-    # Waiting for a minute before inserting the next batch of data
-    time.sleep(60)
