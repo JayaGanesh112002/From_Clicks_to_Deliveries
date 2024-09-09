@@ -8,13 +8,17 @@ def lambda_handler(event, context):
         # getting data from the payload and parsing the float values as Decimal
         body = json.loads(event['body'], parse_float=Decimal)
         
+        # getting the expiration dates for the old records
+        Expiration_date = dict()
+        for truck in body["trucks"]:
+            Expiration_date[truck["Truck_ID"]] = truck["Effective_Date"]
+
         # Creating a DynamoDB connection : 
         dynamodb = boto3.resource('dynamodb')
-        table_name = 'your_table_name'
+        table_name = 'Trucks_data'
         table = dynamodb.Table(table_name)
         
         truck_ids = ["TRK001", "TRK002", "TRK003"]
-        
 
         for truck in truck_ids:
             # Querying the table to get the existing data
@@ -34,7 +38,7 @@ def lambda_handler(event, context):
                     'Effective_Date': current_record["Effective_Date"]},
                     UpdateExpression='SET Expiration_Date = :d, is_active = :a',
                     ExpressionAttributeValues={
-                        ':d' : datetime.now().isoformat(),
+                        ':d' : Expiration_date[truck],
                         ':a' : False}
                         )
             
